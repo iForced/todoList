@@ -6,6 +6,30 @@
     align-items: center;
     background-color: rgba(52, 119, 241, 0.8);
 }
+.list_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid white;
+}
+.list_header_title {
+    color: white;
+    margin: 0;
+}
+.list_header_remove {
+    border: none;
+    background-color: red;
+    color: white;
+    border-radius: 5px;
+    transition: .2s ease;
+    padding: 7px 10px;
+}
+.list_header_remove:hover {
+    cursor: pointer;
+    box-shadow: 0 0 0 2px red;}
 .add_task {
     display: flex;
     justify-content: space-between;
@@ -28,7 +52,7 @@
     border-radius: 5px;
     background-color: green;
     color: white;
-    padding: 5px;
+    padding: 7px 10px;
 }
 .error_text {
     color: red;

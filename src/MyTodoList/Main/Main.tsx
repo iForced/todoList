@@ -44,7 +44,7 @@ const Main: React.FC = () => {
 
     const addTask = (text: string, todolistID: string) => {
         const newTask = {id: v1(), title: text, isDone: false}
-        tasks[todolistID].push(newTask)
+        tasks[todolistID].unshift(newTask)
         setTasks({...tasks})
     }
 
@@ -66,6 +66,11 @@ const Main: React.FC = () => {
         setTodolists([...todolists])
     }
 
+    const removeList = (todoListID: string) => {
+        const updatedLists = todolists.filter(tl => tl.id !== todoListID)
+        setTodolists(updatedLists)
+    }
+
     return (
         <div className={s.container}>
             {todolists.map(tl => {
@@ -82,6 +87,7 @@ const Main: React.FC = () => {
                     changeStatus={changeStatus}
                     changeFilter={changeFilter}
                     filter={tl.filter}
+                    removeList={removeList}
                 />
             })}
         </div>

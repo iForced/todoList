@@ -12,17 +12,21 @@ type ListPropsType = {
     changeStatus: (taskID: string, newStatus: boolean, todolistID: string) => void
     changeFilter: (todolistID: string, filterValue: FilterType) => void
     filter: FilterType
+    removeList: (todoListID: string) => void
 }
 
 const List: React.FC<ListPropsType> = (
     {
+        title,
         tasks,
         addTask,
         removeTask,
         changeStatus,
         changeFilter,
         filter,
-        todolistID}
+        todolistID,
+        removeList
+    }
 ) => {
 
     const taskElement = tasks.map((t) => {
@@ -64,12 +68,20 @@ const List: React.FC<ListPropsType> = (
         setInputValue(newInputValue)
     }
 
+    const onRemoveList = () => {
+        removeList(todolistID)
+    }
+
     const onAllFilter = () => changeFilter(todolistID,'all')
     const onActiveFilter = () => changeFilter(todolistID,'active')
     const onCompletedFilter = () => changeFilter(todolistID,'completed')
 
     return (
         <div className={s.todo}>
+            <div className={s.list_header}>
+                <h3 className={s.list_header_title}>{title}</h3>
+                <button onClick={onRemoveList} className={s.list_header_remove}>X</button>
+            </div>
             <div className={s.add_task}>
                 <input
                     value={inputValue}
