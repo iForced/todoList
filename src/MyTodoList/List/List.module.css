@@ -89,21 +89,3 @@
     display: flex;
     gap: 5px;
 }
-.filter_buttons button:hover {
-    cursor: pointer;
-}
-.filter_button {
-    border: 3px solid rgba(157, 132, 95, 0.24);
-    border-radius: 5px;
-    padding: 5px 20px;
-    color: white;
-    background-color: burlywood;
-    font-weight: bold;
-}
-.active_filter {
-    border: none;
-    border-radius: 5px;
-    padding: 5px 20px;
-    color: white;
-    background-color: #2346be;
-}

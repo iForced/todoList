@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import s from './List.module.css'
 import {TaskItemType} from "../Main/Main";
 import {FilterType} from "../../App";
+import {Button} from "../components/Button";
 
 type ListPropsType = {
     todolistID: string
@@ -15,7 +16,7 @@ type ListPropsType = {
     removeList: (todoListID: string) => void
 }
 
-const List: React.FC<ListPropsType> = (
+export const List: React.FC<ListPropsType> = (
     {
         title,
         tasks,
@@ -72,10 +73,6 @@ const List: React.FC<ListPropsType> = (
         removeList(todolistID)
     }
 
-    const onAllFilter = () => changeFilter(todolistID,'all')
-    const onActiveFilter = () => changeFilter(todolistID,'active')
-    const onCompletedFilter = () => changeFilter(todolistID,'completed')
-
     return (
         <div className={s.todo}>
             <div className={s.list_header}>
@@ -96,21 +93,10 @@ const List: React.FC<ListPropsType> = (
                 {taskElement}
             </ul>
             <div className={s.filter_buttons}>
-                <button
-                    onClick={onAllFilter}
-                    className={filter === 'all' ? s.filter_button : s.active_filter}>All
-                </button>
-                <button
-                    onClick={onActiveFilter}
-                    className={filter === 'active' ? s.filter_button : s.active_filter}>Active
-                </button>
-                <button
-                    onClick={onCompletedFilter}
-                    className={filter === 'completed' ? s.filter_button : s.active_filter}>Completed
-                </button>
+                <Button name={'all'} onClick={changeFilter} todolistID={todolistID} filter={filter} />
+                <Button name={'active'} onClick={changeFilter} todolistID={todolistID} filter={filter} />
+                <Button name={'completed'} onClick={changeFilter} todolistID={todolistID} filter={filter} />
             </div>
         </div>
     );
 }
-
-export default List;

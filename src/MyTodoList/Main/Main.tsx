@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import s from './Main.module.css'
-import List from "../List/List";
+import {List} from '../List/List';
 import {v1} from 'uuid'
 
 export type TaskItemType = {
@@ -18,7 +18,7 @@ type TasksType = {
     [todoListID: string]: Array<TaskItemType>
 }
 
-const Main: React.FC = () => {
+export const Main: React.FC = () => {
 
     let todolistID1 = v1();
     let todolistID2 = v1();
@@ -37,38 +37,35 @@ const Main: React.FC = () => {
             {id: v1(), title: "GraphQL", isDone: false},
         ],
         [todolistID2]: [
-            {id: v1(), title: "HTML&CSS2", isDone: true},
-            {id: v1(), title: "JS2", isDone: true},
-            {id: v1(), title: "ReactJS2", isDone: false},
-            {id: v1(), title: "Rest API2", isDone: false},
-            {id: v1(), title: "GraphQL2", isDone: false},
+            {id: v1(), title: "Milk", isDone: true},
+            {id: v1(), title: "Bread", isDone: true},
+            {id: v1(), title: "Sugar", isDone: false},
+            {id: v1(), title: "Oil", isDone: false},
+            {id: v1(), title: "Salt", isDone: false},
         ]
     });
 
     const addTask = (text: string, todolistID: string) => {
         const newTask = {id: v1(), title: text, isDone: false}
-        setTasks({...tasks, [todolistID]: [...tasks[todolistID], newTask] })
+        setTasks({...tasks, [todolistID]: [newTask, ...tasks[todolistID]] })
     }
-
     const removeTask = (taskID: string, todolistID: string) => {
         setTasks({...tasks, [todolistID]: tasks[todolistID].filter(t => t.id !== taskID)})
     }
-
     const changeStatus = (taskID: string, newStatus: boolean, todolistID: string) => {
         setTasks({...tasks, [todolistID]: tasks[todolistID].map(t => t.id === taskID ? {...t, isDone: newStatus} : t)})
     }
-
     const changeFilter = (todolistID: string, filterValue: FilterType) => {
         setTodolists(todolists.map(tl => tl.id === todolistID ? {...tl, filter: filterValue} : tl))
     }
-
     const removeList = (todoListID: string) => {
         setTodolists(todolists.filter(tl => tl.id !== todoListID))
     }
 
     return (
         <div className={s.container}>
-            {todolists.map(tl => {
+            {
+                todolists.map(tl => {
                 let filteredTasks = tasks[tl.id]
                 if (tl.filter === 'active') filteredTasks = tasks[tl.id].filter((t) => !t.isDone)
                 if (tl.filter === 'completed') filteredTasks = tasks[tl.id].filter((t) => t.isDone)
@@ -89,4 +86,3 @@ const Main: React.FC = () => {
     );
 }
 
-export default Main;
