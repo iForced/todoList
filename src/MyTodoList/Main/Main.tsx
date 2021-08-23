@@ -14,18 +14,21 @@ type TodolistsType = {
     title: string
     filter: FilterType
 }
+type TasksType = {
+    [todoListID: string]: Array<TaskItemType>
+}
 
 const Main: React.FC = () => {
 
     let todolistID1 = v1();
     let todolistID2 = v1();
 
-    let [todolists, setTodolists] = useState<Array<TodolistsType>>([
+    const [todolists, setTodolists] = useState<Array<TodolistsType>>([
         {id: todolistID1, title: 'What to learn', filter: 'all'},
         {id: todolistID2, title: 'What to buy', filter: 'all'},
     ])
 
-    let [tasks, setTasks] = useState({
+    const [tasks, setTasks] = useState<TasksType>({
         [todolistID1]: [
             {id: v1(), title: "HTML&CSS", isDone: true},
             {id: v1(), title: "JS", isDone: true},
@@ -44,31 +47,23 @@ const Main: React.FC = () => {
 
     const addTask = (text: string, todolistID: string) => {
         const newTask = {id: v1(), title: text, isDone: false}
-        tasks[todolistID].unshift(newTask)
-        setTasks({...tasks})
+        setTasks({...tasks, [todolistID]: [...tasks[todolistID], newTask] })
     }
 
     const removeTask = (taskID: string, todolistID: string) => {
-        const tasksForList = tasks[todolistID]
-        tasks[todolistID] = tasksForList.filter(t => t.id !== taskID)
-        setTasks({...tasks})
+        setTasks({...tasks, [todolistID]: tasks[todolistID].filter(t => t.id !== taskID)})
     }
 
     const changeStatus = (taskID: string, newStatus: boolean, todolistID: string) => {
-        const updatedTask = tasks[todolistID].find((t) => t.id === taskID)
-        if (updatedTask) updatedTask.isDone = newStatus
-        setTasks({...tasks})
+        setTasks({...tasks, [todolistID]: tasks[todolistID].map(t => t.id === taskID ? {...t, isDone: newStatus} : t)})
     }
 
     const changeFilter = (todolistID: string, filterValue: FilterType) => {
-        const todolist = todolists.find(tl => tl.id === todolistID)
-        if (todolist) todolist.filter = filterValue
-        setTodolists([...todolists])
+        setTodolists(todolists.map(tl => tl.id === todolistID ? {...tl, filter: filterValue} : tl))
     }
 
     const removeList = (todoListID: string) => {
-        const updatedLists = todolists.filter(tl => tl.id !== todoListID)
-        setTodolists(updatedLists)
+        setTodolists(todolists.filter(tl => tl.id !== todoListID))
     }
 
     return (
