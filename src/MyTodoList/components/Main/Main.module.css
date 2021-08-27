@@ -1,0 +1,13 @@
+.container {
+    display: flex;
+}
+.add_list_form {
+    margin: 20px 30px;
+}
+.lists_container {
+    display: flex;
+    justify-content: flex-start;
+    margin: 20px 50px;
+    gap: 20px;
+    align-items: flex-start;
+}

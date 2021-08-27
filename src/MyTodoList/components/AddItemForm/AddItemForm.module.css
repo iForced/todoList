@@ -1,0 +1,28 @@
+.add_task {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.add_input {
+    border: none;
+    background-color: #eaeaea;
+    padding: 5px;
+    border-radius: 5px;
+}
+.error_input {
+    border: 2px solid red;
+    background-color: rgba(255, 0, 0, 0.28);
+    padding: 5px;
+    border-radius: 5px;
+}
+.add_button {
+    border: none;
+    border-radius: 5px;
+    background-color: green;
+    color: white;
+    padding: 7px 10px;
+}
+.error_text {
+    color: red;
+    font-weight: bold;
+}

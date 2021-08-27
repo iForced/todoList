@@ -1,6 +1,6 @@
 import React from "react";
 import s from './Button.module.css'
-import {FilterType} from "../../App";
+import {FilterType} from "../../../App";
 
 type PropsType = {
     name: FilterType
