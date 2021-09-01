@@ -2,9 +2,11 @@ import React from 'react';
 import s from './List.module.css'
 import {TaskItemType} from "../Main/Main";
 import {FilterType} from "../../../App";
-import {Button} from "../Button/Button";
+import {MyButton} from "../Button/MyButton";
 import {AddItemForm} from "../AddItemForm/AddItemForm";
 import {EditableSpan} from "../EditableSpan/EditableSpan";
+import {Checkbox, IconButton} from "@material-ui/core";
+import {Delete} from "@material-ui/icons";
 
 type ListPropsType = {
     todolistID: string
@@ -58,9 +60,15 @@ export const List: React.FC<ListPropsType> = (
             }
             return (
                 <li className={s.list_item + ' ' + (t.isDone && s.list_item_completed)} key={t.id}>
-                    <input type={"checkbox"} checked={t.isDone} onChange={onChangeStatus}/>
+                    <Checkbox
+                        checked={t.isDone}
+                        color={"primary"}
+                        onChange={onChangeStatus}
+                    />
                     <EditableSpan text={t.title} onChange={onTaskTitleChange}/>
-                    <button onClick={onRemove} className={s.remove_button}>X</button>
+                    <IconButton onClick={onRemove}>
+                        <Delete/>
+                    </IconButton>
                 </li>
             )
         }
@@ -72,16 +80,18 @@ export const List: React.FC<ListPropsType> = (
                 <h3 className={s.list_header_title}>
                     <EditableSpan text={title} onChange={onListTitleChange}/>
                 </h3>
-                <button onClick={onRemoveList} className={s.list_header_remove}>X</button>
+                <IconButton onClick={onRemoveList}>
+                    <Delete/>
+                </IconButton>
             </div>
             <AddItemForm addItem={onAddTask}/>
             <ul className={s.list}>
                 {taskElement}
             </ul>
             <div className={s.filter_buttons}>
-                <Button name={'all'} onClick={changeFilter} todolistID={todolistID} filter={filter}/>
-                <Button name={'active'} onClick={changeFilter} todolistID={todolistID} filter={filter}/>
-                <Button name={'completed'} onClick={changeFilter} todolistID={todolistID} filter={filter}/>
+                <MyButton name={'all'} onClick={changeFilter} todolistID={todolistID} filter={filter}/>
+                <MyButton name={'active'} onClick={changeFilter} todolistID={todolistID} filter={filter}/>
+                <MyButton name={'completed'} onClick={changeFilter} todolistID={todolistID} filter={filter}/>
             </div>
         </div>
     )

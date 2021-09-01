@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import s from './AddItemForm.module.css'
+import {Button, IconButton, TextField} from "@material-ui/core";
+import {AddBox} from "@material-ui/icons";
 
 type PropsType = {
     addItem: (text: string) => void
@@ -30,15 +32,25 @@ export const AddItemForm: React.FC<PropsType> = ({addItem}) => {
     return (
         <>
             <div className={s.add_task}>
-                <input
+                <TextField
+                    variant={"outlined"}
                     value={inputValue}
                     onChange={onInputChange}
                     onKeyPress={onEnterPress}
-                    className={error ? s.error_input : s.add_input}
+                    error={!!error}
+                    label={"Enter title"}
+                    helperText={error}
+                    size={"small"}
+
                 />
-                <button onClick={onAdd} className={s.add_button}>+</button>
+                <IconButton
+                    onClick={onAdd}
+                    color={"primary"}
+
+                >
+                    <AddBox />
+                </IconButton>
             </div>
-            <div className={s.error_text}>{error}</div>
         </>
     )
 }
