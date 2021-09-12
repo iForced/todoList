@@ -69,6 +69,8 @@ export const Main: React.FC = () => {
     }
     const removeList = (todoListID: string) => {
         setTodolists(todolists.filter(tl => tl.id !== todoListID))
+        delete tasks[todoListID]
+        setTasks({...tasks})
     }
     const changeListTitle = (text: string, todolistID: string) => {
         setTodolists(todolists.map(tl => tl.id === todolistID ? {...tl, title: text} : tl))
