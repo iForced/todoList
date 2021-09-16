@@ -1,13 +1,13 @@
-import React from "react";
 import {TasksType} from "../MyTodoList/components/Main/Main";
 import {v1} from "uuid";
+import {AddTodoListAT, RemoveTodoListAT} from "./todoListsReducer";
 
 type RemoveTaskAT = ReturnType<typeof RemoveTaskAC>
 type AddTaskAT = ReturnType<typeof AddTaskAC>
 type ChangeTaskStatusAT = ReturnType<typeof ChangeTaskStatusAC>
 type ChangeTaskTitleAT = ReturnType<typeof ChangeTaskTitleAC>
 
-type ActionsType = RemoveTaskAT | AddTaskAT | ChangeTaskStatusAT | ChangeTaskTitleAT
+type ActionsType = RemoveTaskAT | AddTaskAT | ChangeTaskStatusAT | ChangeTaskTitleAT | AddTodoListAT | RemoveTodoListAT
 
 export const tasksReducer = (state: TasksType, action: ActionsType): TasksType => {
     switch (action.type) {
@@ -20,6 +20,12 @@ export const tasksReducer = (state: TasksType, action: ActionsType): TasksType =
             return {...state, [action.todoListID]: state[action.todoListID].map(t => t.id === action.taskID ? {...t, isDone: action.newStatus} : t)}
         case 'CHANGE_TASK_TITLE':
             return {...state, [action.todoListID]: state[action.todoListID].map(t => t.id === action.taskID ? {...t, title: action.newTitle} : t)}
+        case 'ADD_TODOLIST':
+            return {...state, [action.id]: []}
+        case 'REMOVE_TODOLIST':
+            const stateCopy = {...state}
+            delete stateCopy[action.id]
+            return stateCopy
         default:
             return state
     }
@@ -36,7 +42,7 @@ export const AddTaskAC = (title: string, todoListID: string) => {
     return {
         type: 'ADD_TASK' as const,
         todoListID: todoListID,
-        title: title
+        title: title,
     }
 }
 export const ChangeTaskStatusAC = (taskID: string, newStatus: boolean, todoListID: string) => {

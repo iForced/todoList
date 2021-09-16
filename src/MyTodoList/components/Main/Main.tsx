@@ -123,35 +123,6 @@ export const Main: React.FC = () => {
                     })}
                 </Grid>
             </Container>
-            {/*<div className={s.container}>*/}
-            {/*    <div className={s.add_list_form}>*/}
-            {/*        <h4>Add new todolist</h4>*/}
-            {/*        <i>Enter todolist name</i>*/}
-            {/*        <AddItemForm addItem={addTodoList}/>*/}
-            {/*    </div>*/}
-            {/*    <div className={s.lists_container}>*/}
-            {/*        {*/}
-            {/*            todolists.map(tl => {*/}
-            {/*                let filteredTasks = tasks[tl.id]*/}
-            {/*                if (tl.filter === 'active') filteredTasks = tasks[tl.id].filter((t) => !t.isDone)*/}
-            {/*                if (tl.filter === 'completed') filteredTasks = tasks[tl.id].filter((t) => t.isDone)*/}
-            {/*                return <List*/}
-            {/*                    todolistID={tl.id}*/}
-            {/*                    key={tl.id}*/}
-            {/*                    title={tl.title}*/}
-            {/*                    tasks={filteredTasks}*/}
-            {/*                    addTask={addTask}*/}
-            {/*                    removeTask={removeTask}*/}
-            {/*                    changeStatus={changeStatus}*/}
-            {/*                    changeFilter={changeFilter}*/}
-            {/*                    filter={tl.filter}*/}
-            {/*                    removeList={removeList}*/}
-            {/*                    changeListTitle={changeListTitle}*/}
-            {/*                    changeTaskTitle={changeTaskTitle}*/}
-            {/*                />*/}
-            {/*            })}*/}
-            {/*    </div>*/}
-            {/*</div>*/}
         </>
     )
 }
