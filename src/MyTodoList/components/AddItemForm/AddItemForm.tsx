@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import s from './AddItemForm.module.css'
-import {Button, IconButton, TextField} from "@material-ui/core";
+import {IconButton, TextField} from "@material-ui/core";
 import {AddBox} from "@material-ui/icons";
 
 type PropsType = {
@@ -41,12 +41,10 @@ export const AddItemForm: React.FC<PropsType> = ({addItem}) => {
                     label={"Enter title"}
                     helperText={error}
                     size={"small"}
-
                 />
                 <IconButton
                     onClick={onAdd}
                     color={"primary"}
-
                 >
                     <AddBox />
                 </IconButton>

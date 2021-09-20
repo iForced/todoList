@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import s from './Main.module.css'
 import {List} from '../List/List';
 import {v1} from 'uuid'
 import {AddItemForm} from "../AddItemForm/AddItemForm";

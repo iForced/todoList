@@ -1,5 +1,4 @@
 import React from "react";
-import s from './MyButton.module.css'
 import {FilterType} from "../../../App";
 import {Button} from "@material-ui/core";
 
