@@ -1,8 +1,10 @@
 import {v1} from "uuid";
 
 export type FilterType = 'all' | 'active' | 'completed'
-type InitialStateType = typeof initialState
-type TodolistsType = {id: string, title: string, filter: FilterType}
+type InitialStateType = {
+    todoLists: Array<TodoListType>
+}
+type TodoListType = {id: string, title: string, filter: FilterType}
 
 type AddTodoListActionType = ReturnType<typeof addTodoList>
 type RemoveTodoListActionType = ReturnType<typeof removeTodoList>
@@ -19,8 +21,8 @@ export enum TodoListsActions {
 
 const initialState = {
     todoLists: [
-        {id: v1(), title: 'What to learn', filter: 'all'},
-        {id: v1(), title: 'What to buy', filter: 'all'},
+        {id: v1(), title: 'What to learn', filter: 'all' as const},
+        {id: v1(), title: 'What to buy', filter: 'all' as const},
     ]
 }
 
@@ -28,7 +30,7 @@ export const todoListReducer = (state: InitialStateType = initialState, action: 
     switch (action.type) {
 
         case TodoListsActions.ADD_TODOLIST:
-            const newTodoList: TodolistsType = {id: v1(), title: action.todoListTitle, filter: 'all'}
+            const newTodoList: TodoListType = {id: v1(), title: action.todoListTitle, filter: 'all'}
             return {...state, todoLists: [...state.todoLists, newTodoList]}
 
         case TodoListsActions.REMOVE_TODOLIST:

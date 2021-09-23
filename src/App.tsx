@@ -1,6 +1,7 @@
 import React from "react";
 import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@material-ui/core";
 import {Menu} from "@material-ui/icons";
+import {TodoListContainer} from "./TodoListWithRedux/components/TodoList/TodoListContainer";
 
 export const App = () => {
     return (
@@ -26,6 +27,7 @@ export const App = () => {
 
                 </Grid>
             </Container>
+            <TodoListContainer />
         </>
     )
 }
