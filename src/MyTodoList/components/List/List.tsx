@@ -1,7 +1,6 @@
 import React from 'react';
 import s from './List.module.css'
-import {TaskItemType} from "../Main/Main";
-import {FilterType} from "../../../App";
+import {FilterType, TaskItemType} from "../Main/Main";
 import {MyButton} from "../Button/MyButton";
 import {AddItemForm} from "../AddItemForm/AddItemForm";
 import {EditableSpan} from "../EditableSpan/EditableSpan";

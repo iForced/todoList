@@ -1,6 +1,6 @@
 import React from "react";
-import {FilterType} from "../../../App";
 import {Button} from "@material-ui/core";
+import {FilterType} from "../Main/Main";
 
 type PropsType = {
     name: FilterType
