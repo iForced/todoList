@@ -4,9 +4,10 @@ import s from './TodoList.module.css';
 import {IconButton} from "@material-ui/core";
 import {Delete} from "@material-ui/icons";
 import {EditableTextFieldContainer} from "../EditableTextField/EditableTextFieldContainer";
+import {TaskContainer} from "../Task/TaskContainer";
 
 type PropsType = {
-    id: string
+    todoListID: string
     title: string
     filter: FilterType
     onAddList: (todoListTitle: string) => void
@@ -16,21 +17,21 @@ type PropsType = {
 
 export const TodoList: React.FC<PropsType> = (props) => {
 
-    const {id, title, filter, onAddList, onRemoveList, onChangeTodoListFilter} = props
+    const {todoListID, title, filter, onAddList, onRemoveList, onChangeTodoListFilter} = props
 
     return (
         <div className={s.todo}>
             <div className={s.list_header}>
                 <h3 className={s.list_header_title}>
-                    <EditableTextFieldContainer id={id} />
+                    <EditableTextFieldContainer id={todoListID} title={title} />
                 </h3>
-                <IconButton onClick={() => onRemoveList(id)}>
+                <IconButton onClick={() => onRemoveList(todoListID)}>
                     <Delete/>
                 </IconButton>
             </div>
             add form
             <ul className={s.list}>
-                tasks
+                <TaskContainer todoListID={todoListID} />
             </ul>
             <div className={s.filter_buttons}>
                 buttons

@@ -1,13 +1,28 @@
 import {v1} from "uuid";
+import {useSelector} from "react-redux";
+import {selectTodolistsState} from "./selectors";
+import {
+    AddTodoListActionType,
+    RemoveTodoListActionType,
+    todoListID1,
+    todoListID2,
+    TodoListsActions
+} from "./todoListReducer";
 
 type InitialStateType = typeof initialState
-type TaskType = {id: string, title: string, isDone: boolean}
+type TaskType = { id: string, title: string, isDone: boolean }
 
 type AddTaskActionType = ReturnType<typeof addTask>
 type RemoveTaskActionType = ReturnType<typeof removeTask>
 type ChangeTaskStatusActionType = ReturnType<typeof changeTaskStatus>
 type ChangeTaskTitleActionType = ReturnType<typeof changeTaskTitle>
-type TasksActionsType = AddTaskActionType | RemoveTaskActionType | ChangeTaskStatusActionType | ChangeTaskTitleActionType
+type TasksActionsType =
+    AddTaskActionType
+    | RemoveTaskActionType
+    | ChangeTaskStatusActionType
+    | ChangeTaskTitleActionType
+    | AddTodoListActionType
+    | RemoveTodoListActionType
 
 export enum TasksActions {
     ADD_TASK = 'TASKS/ADD_TASK',
@@ -17,30 +32,55 @@ export enum TasksActions {
 }
 
 const initialState = {
-    tasks: [
+    [todoListID1]: [
         {id: v1(), title: "HTML&CSS", isDone: true},
         {id: v1(), title: "JS", isDone: true},
         {id: v1(), title: "ReactJS", isDone: false},
         {id: v1(), title: "Rest API", isDone: false},
         {id: v1(), title: "GraphQL", isDone: false},
+    ],
+    [todoListID2]: [
+        {id: v1(), title: "Milk", isDone: true},
+        {id: v1(), title: "Bread", isDone: true},
+        {id: v1(), title: "Sugar", isDone: false},
+        {id: v1(), title: "Oil", isDone: false},
+        {id: v1(), title: "Salt", isDone: false},
     ]
 }
 
-export const tasksReducer = (state: InitialStateType, action: TasksActionsType): InitialStateType => {
+export const tasksReducer = (state: InitialStateType = initialState, action: TasksActionsType): InitialStateType => {
     switch (action.type) {
 
         case TasksActions.ADD_TASK:
             const newTask: TaskType = {id: v1(), title: action.taskTitle, isDone: false}
-            return {...state, tasks: [newTask, ...state.tasks]}
+            return {...state, [action.todoListID]: [newTask, ...state[action.todoListID]]}
 
         case TasksActions.REMOVE_TASK:
-            return {...state, tasks: state.tasks.filter(t => t.id !== action.taskID)}
+            return {...state, [action.todoListID]: state[action.todoListID].filter(t => t.id !== action.taskID)}
 
         case TasksActions.CHANGE_TASK_STATUS:
-            return {...state, tasks: state.tasks.map(t => t.id === action.taskID ? {...t, isDone: action.newTaskStatus} : t)}
+            return {...state,
+                [action.todoListID]: state[action.todoListID].map(t => t.id === action.taskID ? {
+                    ...t,
+                    isDone: action.newTaskStatus
+                } : t)
+            }
 
         case TasksActions.CHANGE_TASK_TITLE:
-            return {...state, tasks: state.tasks.map(t => t.id === action.taskID ? {...t, title: action.newTaskTitle} : t)}
+            return {...state,
+                [action.todoListID]: state[action.todoListID].map(t => t.id === action.taskID ? {
+                    ...t,
+                    title: action.newTaskTitle
+                } : t)
+            }
+
+        case TodoListsActions.ADD_TODOLIST:
+            return {...state, [action.todoListID]: []}
+
+        case TodoListsActions.REMOVE_TODOLIST:
+            const stateCopy = {...state}
+            delete stateCopy[action.todoListID]
+            return stateCopy
 
         default:
             return state

@@ -21,9 +21,8 @@ export const TodoListContainer = () => {
     }
 
     const todoListElements = todoLists.map(tl =>
-        <TodoList
-            key={tl.id}
-            id={tl.id}
+        <TodoList key={tl.id}
+            todoListID={tl.id}
             title={tl.title}
             filter={tl.filter}
             onAddList={onAddList}

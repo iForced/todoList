@@ -7,18 +7,17 @@ import {changeTodoListTitle} from "../../store/todoListReducer";
 
 type PropsType = {
     id: string
+    title: string
 }
 
 export const EditableTextFieldContainer: React.FC<PropsType> = (props) => {
 
     const dispatch = useDispatch<Dispatch>()
-    const {todoLists} = useSelector(selectTodolistsState)
-
     const [editMode, setEditMode] = useState<boolean>(false)
-    const spanValue = todoLists.filter(tl => tl.id === props.id)[0].title
+    const {id, title} = props
 
     const onValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        dispatch(changeTodoListTitle(props.id, e.currentTarget.value))
+        dispatch(changeTodoListTitle(id, e.currentTarget.value))
     }
     const onEditBlur = () => {
         setEditMode(false)
@@ -33,7 +32,7 @@ export const EditableTextFieldContainer: React.FC<PropsType> = (props) => {
     return (
         <EditableTextField
             editMode={editMode}
-            spanValue={spanValue}
+            spanValue={title}
             onValueChange={onValueChange}
             onEditBlur={onEditBlur}
             onEditMode={onEditMode}
