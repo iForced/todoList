@@ -10,7 +10,6 @@ type PropsType = {
     todoListID: string
     title: string
     filter: FilterType
-    onAddList: (todoListTitle: string) => void
     onRemoveList: (todoListID: string) => void
     onChangeTodoListTitle: (e: ChangeEvent<HTMLInputElement>) => void
     onChangeTodoListFilter: (todoListID: string, newFilter: FilterType) => void
@@ -18,7 +17,7 @@ type PropsType = {
 
 export const TodoList: React.FC<PropsType> = (props) => {
 
-    const {todoListID, title, filter, onAddList, onRemoveList, onChangeTodoListTitle, onChangeTodoListFilter} = props
+    const {todoListID, title, filter, onRemoveList, onChangeTodoListTitle, onChangeTodoListFilter} = props
 
     return (
         <div className={s.todo}>

@@ -7,6 +7,8 @@ import {changeTaskStatus, changeTaskTitle, removeTask} from "../../store/tasksRe
 
 export const TaskContainer = (props: { todoListID: string }) => {
 
+    const {todoListID} = props
+
     const dispatch = useDispatch<Dispatch>()
     const {tasks} = useSelector(selectTasksState)
 
@@ -17,12 +19,12 @@ export const TaskContainer = (props: { todoListID: string }) => {
         dispatch(removeTask(todoListID, taskID))
     }
 
-    const taskElement = tasks[props.todoListID].map(t => {
+    const taskElement = tasks[todoListID].map(t => {
         const onTaskTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
-            dispatch(changeTaskTitle(props.todoListID, t.id, e.currentTarget.value))
+            dispatch(changeTaskTitle(todoListID, t.id, e.currentTarget.value))
         }
         return <Task key={t.id}
-                     todoListID={props.todoListID}
+                     todoListID={todoListID}
                      taskID={t.id}
                      title={t.title}
                      isDone={t.isDone}

@@ -1,19 +1,11 @@
 import React, {ChangeEvent, useState} from 'react';
 import {TextField} from "@material-ui/core";
-import {useDispatch} from "react-redux";
-import {Dispatch} from "redux";
-import {changeTodoListTitle} from "../../store/todoListReducer";
 
 type PropsType = {
     title: string
     todoListID?: string
     taskID?: string
-    // editMode: boolean
-    // spanValue: string
     onValueChange: (e: ChangeEvent<HTMLInputElement>) => void
-    // onEditBlur: () => void
-    // onEditMode: () => void
-    // onEnterPress: (e: React.KeyboardEvent<HTMLInputElement>) => void
 }
 
 export const EditableTextField: React.FC<PropsType> = (props) => {
