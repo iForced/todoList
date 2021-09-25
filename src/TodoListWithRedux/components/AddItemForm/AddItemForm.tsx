@@ -15,6 +15,15 @@ export const AddItemForm: React.FC<PropsType> = (props) => {
     const [inputValue, setInputValue] = useState<string>('')
     const [error, setError] = useState<string>('')
 
+    const onAdd = () => {
+        if (inputValue.trim()) {
+            addItem(inputValue.trim())
+            setInputValue('')
+        } else {
+            setError('Введите текст')
+        }
+    }
+
     const onEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
         e.key === 'Enter' ? onAdd() : setError('Введите текст')
     }
@@ -25,14 +34,6 @@ export const AddItemForm: React.FC<PropsType> = (props) => {
         setInputValue(newInputValue)
     }
 
-    const onAdd = () => {
-        if (inputValue.trim()) {
-            addItem(inputValue.trim())
-            setInputValue('')
-        } else {
-            setError('Введите текст')
-        }
-    }
 
     return (
         <>

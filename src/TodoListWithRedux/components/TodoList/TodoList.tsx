@@ -5,6 +5,10 @@ import {IconButton} from "@material-ui/core";
 import {Delete} from "@material-ui/icons";
 import {TaskContainer} from "../Task/TaskContainer";
 import {EditableTextField} from "../EditableTextField/EditableTextField";
+import {AddItemForm} from "../AddItemForm/AddItemForm";
+import {useDispatch} from "react-redux";
+import {addTask} from "../../store/tasksReducer";
+import {v1} from "uuid";
 
 type PropsType = {
     todoListID: string
@@ -18,6 +22,11 @@ type PropsType = {
 export const TodoList: React.FC<PropsType> = (props) => {
 
     const {todoListID, title, filter, onRemoveList, onChangeTodoListTitle, onChangeTodoListFilter} = props
+    const dispatch = useDispatch()
+
+    const onAddTask = (text: string) => {
+        dispatch(addTask(todoListID, text))
+    }
 
     return (
         <div className={s.todo}>
@@ -29,7 +38,7 @@ export const TodoList: React.FC<PropsType> = (props) => {
                     <Delete/>
                 </IconButton>
             </div>
-            add form
+            <AddItemForm addItem={onAddTask} />
             <ul className={s.list}>
                 <TaskContainer todoListID={todoListID} />
             </ul>
