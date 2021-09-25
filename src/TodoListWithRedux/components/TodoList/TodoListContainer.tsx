@@ -1,9 +1,15 @@
-import React from "react";
+import React, {ChangeEvent} from "react";
 import {Dispatch} from "redux";
 import {useDispatch, useSelector} from 'react-redux'
 import {TodoList} from "./TodoList";
 import {selectTodolistsState} from "../../store/selectors";
-import {addTodoList, changeTodoListFilter, FilterType, removeTodoList} from "../../store/todoListReducer";
+import {
+    addTodoList,
+    changeTodoListFilter,
+    changeTodoListTitle,
+    FilterType,
+    removeTodoList
+} from "../../store/todoListReducer";
 
 export const TodoListContainer = () => {
 
@@ -20,15 +26,21 @@ export const TodoListContainer = () => {
         dispatch(changeTodoListFilter(todoListID, newFilter))
     }
 
-    const todoListElements = todoLists.map(tl =>
-        <TodoList key={tl.id}
-            todoListID={tl.id}
-            title={tl.title}
-            filter={tl.filter}
-            onAddList={onAddList}
-            onRemoveList={onRemoveList}
-            onChangeTodoListFilter={onChangeTodoListFilter}
-        />)
+    const todoListElements = todoLists.map(tl => {
+        const onChangeTodoListTitle = (e: ChangeEvent<HTMLInputElement>) => {
+            dispatch(changeTodoListTitle(tl.id, e.currentTarget.value))
+        }
+        return <TodoList key={tl.id}
+                         todoListID={tl.id}
+                         title={tl.title}
+                         filter={tl.filter}
+                         onAddList={onAddList}
+                         onRemoveList={onRemoveList}
+                         onChangeTodoListTitle={onChangeTodoListTitle}
+                         onChangeTodoListFilter={onChangeTodoListFilter}
+        />
+    })
+
 
     return (
 

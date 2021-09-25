@@ -1,30 +1,47 @@
-import React from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import {TextField} from "@material-ui/core";
+import {useDispatch} from "react-redux";
+import {Dispatch} from "redux";
+import {changeTodoListTitle} from "../../store/todoListReducer";
 
 type PropsType = {
-    editMode: boolean
-    spanValue: string
-    onValueChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-    onEditBlur: () => void
-    onEditMode: () => void
-    onEnterPress: (e: React.KeyboardEvent<HTMLInputElement>) => void
+    title: string
+    todoListID?: string
+    taskID?: string
+    // editMode: boolean
+    // spanValue: string
+    onValueChange: (e: ChangeEvent<HTMLInputElement>) => void
+    // onEditBlur: () => void
+    // onEditMode: () => void
+    // onEnterPress: (e: React.KeyboardEvent<HTMLInputElement>) => void
 }
 
 export const EditableTextField: React.FC<PropsType> = (props) => {
 
-    const {editMode, spanValue, onValueChange, onEditBlur, onEditMode, onEnterPress} = props
+    const {title, onValueChange} = props
+    const [editMode, setEditMode] = useState<boolean>(false)
+
+    const onEditBlur = () => {
+        setEditMode(false)
+    }
+    const onEditMode = () => {
+        setEditMode(true)
+    }
+    const onEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') setEditMode(false)
+    }
 
     return (
         <div>
             {editMode
                 ? <TextField
                     autoFocus
-                    value={spanValue}
+                    value={title}
                     onChange={onValueChange}
                     onBlur={onEditBlur}
                     onKeyPress={onEnterPress}
                 />
-                : <span onDoubleClick={onEditMode}>{spanValue}</span>
+                : <span onDoubleClick={onEditMode}>{title}</span>
             }
         </div>
     )
