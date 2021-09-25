@@ -1,7 +1,7 @@
 import React, {ChangeEvent} from "react";
 import {FilterType} from "../../store/todoListReducer";
 import s from './TodoList.module.css';
-import {IconButton} from "@material-ui/core";
+import {Button, IconButton} from "@material-ui/core";
 import {Delete} from "@material-ui/icons";
 import {TaskContainer} from "../Task/TaskContainer";
 import {EditableTextField} from "../EditableTextField/EditableTextField";
@@ -9,6 +9,7 @@ import {AddItemForm} from "../AddItemForm/AddItemForm";
 import {useDispatch} from "react-redux";
 import {addTask} from "../../store/tasksReducer";
 import {v1} from "uuid";
+import {MyButton} from "../MyButton/MyButton";
 
 type PropsType = {
     todoListID: string
@@ -43,7 +44,9 @@ export const TodoList: React.FC<PropsType> = (props) => {
                 <TaskContainer todoListID={todoListID} />
             </ul>
             <div className={s.filter_buttons}>
-                buttons
+                <MyButton name={'all'} onClick={onChangeTodoListFilter} todolistID={todoListID} filter={filter} />
+                <MyButton name={'active'} onClick={onChangeTodoListFilter} todolistID={todoListID} filter={filter} />
+                <MyButton name={'completed'} onClick={onChangeTodoListFilter} todolistID={todoListID} filter={filter} />
             </div>
         </div>
     )
