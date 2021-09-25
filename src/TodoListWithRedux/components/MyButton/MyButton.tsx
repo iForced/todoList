@@ -1,7 +1,6 @@
 import React from "react";
 import {Button} from "@material-ui/core";
 import {FilterType} from "../../store/todoListReducer";
-import {store} from "../../store/store";
 
 type PropsType = {
     name: FilterType
@@ -16,7 +15,6 @@ export const MyButton: React.FC<PropsType> = (props) => {
 
     const onClickHandler = () => {
         onClick(todolistID, name);
-        console.log(store.getState().todolists.todoLists[0])
     }
 
     return (

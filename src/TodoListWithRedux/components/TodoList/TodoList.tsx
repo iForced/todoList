@@ -1,14 +1,13 @@
 import React, {ChangeEvent} from "react";
 import {FilterType} from "../../store/todoListReducer";
 import s from './TodoList.module.css';
-import {Button, IconButton} from "@material-ui/core";
+import {IconButton} from "@material-ui/core";
 import {Delete} from "@material-ui/icons";
 import {TaskContainer} from "../Task/TaskContainer";
 import {EditableTextField} from "../EditableTextField/EditableTextField";
 import {AddItemForm} from "../AddItemForm/AddItemForm";
 import {useDispatch} from "react-redux";
 import {addTask} from "../../store/tasksReducer";
-import {v1} from "uuid";
 import {MyButton} from "../MyButton/MyButton";
 
 type PropsType = {

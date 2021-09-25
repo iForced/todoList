@@ -2,7 +2,7 @@ import React, {ChangeEvent} from "react";
 import {Dispatch} from "redux";
 import {useDispatch, useSelector} from 'react-redux'
 import {TodoList} from "./TodoList";
-import {selectTasksState, selectTodolistsState} from "../../store/selectors";
+import {selectTodolistsState} from "../../store/selectors";
 import {
     changeTodoListFilter,
     changeTodoListTitle,
@@ -14,7 +14,6 @@ export const TodoListContainer = () => {
 
     const dispatch = useDispatch<Dispatch>()
     const {todoLists} = useSelector(selectTodolistsState)
-    const {tasks} = useSelector(selectTasksState)
 
     const onRemoveList = (todoListID: string) => {
         dispatch(removeTodoList(todoListID))
@@ -36,7 +35,6 @@ export const TodoListContainer = () => {
                          onChangeTodoListFilter={onChangeTodoListFilter}
         />
     })
-
 
     return (
 

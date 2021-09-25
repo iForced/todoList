@@ -2,7 +2,6 @@ import s from "../../../MyTodoList/components/AddItemForm/AddItemForm.module.css
 import {IconButton, TextField} from "@material-ui/core";
 import {AddBox} from "@material-ui/icons";
 import React, {useState} from "react";
-import {useDispatch} from "react-redux";
 
 type PropsType ={
     addItem: (text: string) => void

@@ -1,6 +1,4 @@
 import {v1} from "uuid";
-import {useSelector} from "react-redux";
-import {selectTodolistsState} from "./selectors";
 import {
     AddTodoListActionType,
     RemoveTodoListActionType,
