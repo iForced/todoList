@@ -4,13 +4,17 @@ import {useDispatch, useSelector} from "react-redux";
 import {Dispatch} from "redux";
 import {selectTasksState} from "../../store/selectors";
 import {changeTaskStatus, changeTaskTitle, removeTask} from "../../store/tasksReducer";
+import {FilterType} from "../../store/todoListReducer";
 
-export const TaskContainer = (props: { todoListID: string }) => {
+export const TaskContainer = (props: { todoListID: string, filter: FilterType }) => {
 
-    const {todoListID} = props
+    const {todoListID, filter} = props
 
     const dispatch = useDispatch<Dispatch>()
     const {tasks} = useSelector(selectTasksState)
+    let tasksForTodoList = tasks[todoListID]
+    if (filter === 'completed') tasksForTodoList = tasksForTodoList.filter(t => t.isDone)
+    if (filter === 'active') tasksForTodoList = tasksForTodoList.filter(t => !t.isDone)
 
     const onStatusChange = (todoListID: string, taskID: string, newTaskStatus: boolean) => {
         dispatch(changeTaskStatus(todoListID, taskID, newTaskStatus))
@@ -19,7 +23,7 @@ export const TaskContainer = (props: { todoListID: string }) => {
         dispatch(removeTask(todoListID, taskID))
     }
 
-    const taskElement = tasks[todoListID].map(t => {
+    const taskElement = tasksForTodoList.map(t => {
         const onTaskTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
             dispatch(changeTaskTitle(todoListID, t.id, e.currentTarget.value))
         }

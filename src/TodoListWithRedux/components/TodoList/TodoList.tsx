@@ -40,7 +40,7 @@ export const TodoList: React.FC<PropsType> = (props) => {
             </div>
             <AddItemForm addItem={onAddTask} />
             <ul className={s.list}>
-                <TaskContainer todoListID={todoListID} />
+                <TaskContainer todoListID={todoListID} filter={filter} />
             </ul>
             <div className={s.filter_buttons}>
                 <MyButton name={'all'} onClick={onChangeTodoListFilter} todolistID={todoListID} filter={filter} />
