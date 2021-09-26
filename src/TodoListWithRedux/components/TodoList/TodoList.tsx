@@ -1,7 +1,7 @@
 import React, {ChangeEvent} from "react";
 import {FilterType} from "../../store/todoListReducer";
 import s from './TodoList.module.css';
-import {IconButton} from "@material-ui/core";
+import {Grid, IconButton, Paper} from "@material-ui/core";
 import {Delete} from "@material-ui/icons";
 import {TaskContainer} from "../Task/TaskContainer";
 import {EditableTextField} from "../EditableTextField/EditableTextField";
@@ -29,24 +29,32 @@ export const TodoList: React.FC<PropsType> = (props) => {
     }
 
     return (
-        <div className={s.todo}>
-            <div className={s.list_header}>
-                <h3 className={s.list_header_title}>
-                    <EditableTextField todoListID={todoListID} title={title} onValueChange={onChangeTodoListTitle} />
-                </h3>
-                <IconButton onClick={() => onRemoveList(todoListID)}>
-                    <Delete/>
-                </IconButton>
-            </div>
-            <AddItemForm addItem={onAddTask} />
-            <ul className={s.list}>
-                <TaskContainer todoListID={todoListID} filter={filter} />
-            </ul>
-            <div className={s.filter_buttons}>
-                <MyButton name={'all'} onClick={onChangeTodoListFilter} todolistID={todoListID} filter={filter} />
-                <MyButton name={'active'} onClick={onChangeTodoListFilter} todolistID={todoListID} filter={filter} />
-                <MyButton name={'completed'} onClick={onChangeTodoListFilter} todolistID={todoListID} filter={filter} />
-            </div>
-        </div>
+        <Grid item>
+            <Paper elevation={6} style={{borderRadius: '10px', padding: '10px'}}>
+                <div className={s.todo}>
+                    <div className={s.list_header}>
+                        <h3 className={s.list_header_title}>
+                            <EditableTextField todoListID={todoListID} title={title}
+                                               onValueChange={onChangeTodoListTitle}/>
+                        </h3>
+                        <IconButton onClick={() => onRemoveList(todoListID)}>
+                            <Delete/>
+                        </IconButton>
+                    </div>
+                    <AddItemForm addItem={onAddTask}/>
+                    <ul className={s.list}>
+                        <TaskContainer todoListID={todoListID} filter={filter}/>
+                    </ul>
+                    <div className={s.filter_buttons}>
+                        <MyButton name={'all'} onClick={onChangeTodoListFilter} todolistID={todoListID}
+                                  filter={filter}/>
+                        <MyButton name={'active'} onClick={onChangeTodoListFilter} todolistID={todoListID}
+                                  filter={filter}/>
+                        <MyButton name={'completed'} onClick={onChangeTodoListFilter} todolistID={todoListID}
+                                  filter={filter}/>
+                    </div>
+                </div>
+            </Paper>
+        </Grid>
     )
 }

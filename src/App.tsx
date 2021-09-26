@@ -1,5 +1,5 @@
 import React from "react";
-import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@material-ui/core";
+import {AppBar, Button, Container, Grid, IconButton, Toolbar, Typography} from "@material-ui/core";
 import {Menu} from "@material-ui/icons";
 import {TodoListContainer} from "./TodoListWithRedux/components/TodoList/TodoListContainer";
 import {AddItemForm} from "./TodoListWithRedux/components/AddItemForm/AddItemForm";
@@ -27,16 +27,15 @@ export const App = () => {
                 </Toolbar>
             </AppBar>
             <Container fixed maxWidth={"xl"}>
-                <Grid container style={{padding: "10px"}} alignItems={"center"} direction={"column"}>
+                <Grid container style={{padding: "10px"}} alignItems={"center"} direction={"column"} >
                     <h4>Add new todolist</h4>
                     <i>Enter todolist name</i>
-                    <AddItemForm addItem={onAddTodoList} />
+                    <AddItemForm addItem={onAddTodoList}/>
                 </Grid>
                 <Grid container spacing={3} justifyContent={"center"}>
-
+                    <TodoListContainer/>
                 </Grid>
             </Container>
-            <TodoListContainer />
         </>
     )
 }

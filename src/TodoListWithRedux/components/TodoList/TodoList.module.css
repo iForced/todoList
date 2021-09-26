@@ -1,0 +1,28 @@
+.todo {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: cornflowerblue;
+    gap: 15px;
+}
+.list_header {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px;
+}
+.list_header_title {
+    color: white;
+    font-size: 1.5rem;
+}
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+}
+.filter_buttons {
+    display: flex;
+    gap: 10px;
+}
