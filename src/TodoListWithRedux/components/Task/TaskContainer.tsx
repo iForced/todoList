@@ -6,7 +6,8 @@ import {selectTasksState} from "../../store/selectors";
 import {changeTaskStatus, changeTaskTitle, removeTask} from "../../store/tasksReducer";
 import {FilterType} from "../../store/todoListReducer";
 
-export const TaskContainer = (props: { todoListID: string, filter: FilterType }) => {
+export const TaskContainer = React.memo((props: { todoListID: string, filter: FilterType }) => {
+    console.log('task container')
 
     const {todoListID, filter} = props
 
@@ -45,4 +46,4 @@ export const TaskContainer = (props: { todoListID: string, filter: FilterType })
         </>
 
     )
-}
+})

@@ -14,7 +14,8 @@ type  PropsType = {
     onRemoveTask: (todoListID: string, taskID: string) => void
 }
 
-export const Task: React.FC<PropsType> = (props) => {
+export const Task: React.FC<PropsType> = React.memo((props) => {
+    console.log('task')
 
     const {todoListID, taskID, title, isDone, onTaskTitleChange, onStatusChange, onRemoveTask} = props
 
@@ -31,4 +32,4 @@ export const Task: React.FC<PropsType> = (props) => {
             </IconButton>
         </li>
     )
-}
+})

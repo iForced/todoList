@@ -8,7 +8,8 @@ type PropsType = {
     onValueChange: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
-export const EditableTextField: React.FC<PropsType> = (props) => {
+export const EditableTextField: React.FC<PropsType> = React.memo((props) => {
+    console.log('editable text field')
 
     const {title, onValueChange} = props
     const [editMode, setEditMode] = useState<boolean>(false)
@@ -37,4 +38,4 @@ export const EditableTextField: React.FC<PropsType> = (props) => {
             }
         </div>
     )
-}
+})

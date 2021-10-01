@@ -10,7 +10,8 @@ import {
     removeTodoList
 } from "../../store/todoListReducer";
 
-export const TodoListContainer = () => {
+export const TodoListContainer = React.memo(() => {
+    console.log('todolist container')
 
     const dispatch = useDispatch<Dispatch>()
     const {todoLists} = useSelector(selectTodolistsState)
@@ -43,4 +44,4 @@ export const TodoListContainer = () => {
         </>
 
     )
-}
+})

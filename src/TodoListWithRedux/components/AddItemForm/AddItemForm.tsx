@@ -7,7 +7,8 @@ type PropsType ={
     addItem: (text: string) => void
 }
 
-export const AddItemForm: React.FC<PropsType> = (props) => {
+export const AddItemForm: React.FC<PropsType> = React.memo((props) => {
+    console.log('add item form')
 
     const {addItem} = props
 
@@ -56,4 +57,4 @@ export const AddItemForm: React.FC<PropsType> = (props) => {
             </div>
         </>
     )
-}
+})

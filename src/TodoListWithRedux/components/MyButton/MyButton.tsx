@@ -9,7 +9,8 @@ type PropsType = {
     filter: FilterType
 }
 
-export const MyButton: React.FC<PropsType> = (props) => {
+export const MyButton: React.FC<PropsType> = React.memo((props) => {
+    console.log('my button')
 
     const {name, filter, todolistID, onClick} = props
 
@@ -25,4 +26,4 @@ export const MyButton: React.FC<PropsType> = (props) => {
         >{name}
         </Button>
     )
-}
+})

@@ -19,7 +19,8 @@ type PropsType = {
     onChangeTodoListFilter: (todoListID: string, newFilter: FilterType) => void
 }
 
-export const TodoList: React.FC<PropsType> = (props) => {
+export const TodoList: React.FC<PropsType> = React.memo((props) => {
+    console.log('todolist')
 
     const {todoListID, title, filter, onRemoveList, onChangeTodoListTitle, onChangeTodoListFilter} = props
     const dispatch = useDispatch()
@@ -57,4 +58,4 @@ export const TodoList: React.FC<PropsType> = (props) => {
             </Paper>
         </Grid>
     )
-}
+})
