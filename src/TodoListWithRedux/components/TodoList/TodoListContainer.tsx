@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from "react";
+import React, {useCallback} from "react";
 import {Dispatch} from "redux";
 import {useDispatch, useSelector} from 'react-redux'
 import {TodoList} from "./TodoList";
@@ -16,23 +16,23 @@ export const TodoListContainer = React.memo(() => {
     const dispatch = useDispatch<Dispatch>()
     const {todoLists} = useSelector(selectTodolistsState)
 
-    const onRemoveList = (todoListID: string) => {
+    const onRemoveList = useCallback((todoListID: string) => {
         dispatch(removeTodoList(todoListID))
-    }
-    const onChangeTodoListFilter = (todoListID: string, newFilter: FilterType) => {
+    }, [])
+    const onChangeTodoListFilter = useCallback((todoListID: string, newFilter: FilterType) => {
         dispatch(changeTodoListFilter(todoListID, newFilter))
-    }
+    }, [])
+    const onTitleChange = useCallback((id: string, text: string) => {
+        dispatch(changeTodoListTitle(id, text))
+    }, [])
 
     const todoListElements = todoLists.map(tl => {
-        const onChangeTodoListTitle = (e: ChangeEvent<HTMLInputElement>) => {
-            dispatch(changeTodoListTitle(tl.id, e.currentTarget.value))
-        }
         return <TodoList key={tl.id}
                          todoListID={tl.id}
                          title={tl.title}
                          filter={tl.filter}
                          onRemoveList={onRemoveList}
-                         onChangeTodoListTitle={onChangeTodoListTitle}
+                         onChangeTodoListTitle={onTitleChange}
                          onChangeTodoListFilter={onChangeTodoListFilter}
         />
     })

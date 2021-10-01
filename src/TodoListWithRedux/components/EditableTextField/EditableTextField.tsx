@@ -5,7 +5,7 @@ type PropsType = {
     title: string
     todoListID?: string
     taskID?: string
-    onValueChange: (e: ChangeEvent<HTMLInputElement>) => void
+    onValueChange: (text: string) => void
 }
 
 export const EditableTextField: React.FC<PropsType> = React.memo((props) => {
@@ -23,6 +23,9 @@ export const EditableTextField: React.FC<PropsType> = React.memo((props) => {
     const onEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') setEditMode(false)
     }
+    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        onValueChange(e.currentTarget.value)
+    }
 
     return (
         <div>
@@ -30,7 +33,7 @@ export const EditableTextField: React.FC<PropsType> = React.memo((props) => {
                 ? <TextField
                     autoFocus
                     value={title}
-                    onChange={onValueChange}
+                    onChange={onChangeHandler}
                     onBlur={onEditBlur}
                     onKeyPress={onEnterPress}
                 />

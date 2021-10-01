@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useCallback} from "react";
 import {Button} from "@material-ui/core";
 import {FilterType} from "../../store/todoListReducer";
 
@@ -14,9 +14,9 @@ export const MyButton: React.FC<PropsType> = React.memo((props) => {
 
     const {name, filter, todolistID, onClick} = props
 
-    const onClickHandler = () => {
+    const onClickHandler = useCallback(() => {
         onClick(todolistID, name);
-    }
+    }, [])
 
     return (
         <Button

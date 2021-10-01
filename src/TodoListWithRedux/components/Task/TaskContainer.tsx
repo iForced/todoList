@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from "react";
+import React, {useCallback} from "react";
 import {Task} from "./Task";
 import {useDispatch, useSelector} from "react-redux";
 import {Dispatch} from "redux";
@@ -17,23 +17,23 @@ export const TaskContainer = React.memo((props: { todoListID: string, filter: Fi
     if (filter === 'completed') tasksForTodoList = tasksForTodoList.filter(t => t.isDone)
     if (filter === 'active') tasksForTodoList = tasksForTodoList.filter(t => !t.isDone)
 
-    const onStatusChange = (todoListID: string, taskID: string, newTaskStatus: boolean) => {
+    const onStatusChange = useCallback((todoListID: string, taskID: string, newTaskStatus: boolean) => {
         dispatch(changeTaskStatus(todoListID, taskID, newTaskStatus))
-    }
-    const onRemoveTask = (todoListID: string, taskID: string) => {
+    }, [])
+    const onRemoveTask = useCallback((todoListID: string, taskID: string) => {
         dispatch(removeTask(todoListID, taskID))
-    }
+    }, [])
+    const onTitleChange = useCallback((id: string, text: string) => {
+        dispatch(changeTaskTitle(todoListID, id, text))
+    }, [])
 
     const taskElement = tasksForTodoList.map(t => {
-        const onTaskTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
-            dispatch(changeTaskTitle(todoListID, t.id, e.currentTarget.value))
-        }
         return <Task key={t.id}
                      todoListID={todoListID}
                      taskID={t.id}
                      title={t.title}
                      isDone={t.isDone}
-                     onTaskTitleChange={onTaskTitleChange}
+                     onTitleChange={onTitleChange}
                      onStatusChange={onStatusChange}
                      onRemoveTask={onRemoveTask}
         />

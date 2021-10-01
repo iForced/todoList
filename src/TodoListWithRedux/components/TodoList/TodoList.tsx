@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from "react";
+import React, {useCallback} from "react";
 import {FilterType} from "../../store/todoListReducer";
 import s from './TodoList.module.css';
 import {Grid, IconButton, Paper} from "@material-ui/core";
@@ -15,7 +15,7 @@ type PropsType = {
     title: string
     filter: FilterType
     onRemoveList: (todoListID: string) => void
-    onChangeTodoListTitle: (e: ChangeEvent<HTMLInputElement>) => void
+    onChangeTodoListTitle: (id: string, text: string) => void
     onChangeTodoListFilter: (todoListID: string, newFilter: FilterType) => void
 }
 
@@ -25,9 +25,15 @@ export const TodoList: React.FC<PropsType> = React.memo((props) => {
     const {todoListID, title, filter, onRemoveList, onChangeTodoListTitle, onChangeTodoListFilter} = props
     const dispatch = useDispatch()
 
-    const onAddTask = (text: string) => {
+    const onAddTask = useCallback((text: string) => {
         dispatch(addTask(todoListID, text))
-    }
+    }, [])
+    const onTitleChangeHandler = useCallback((text: string) => {
+        onChangeTodoListTitle(todoListID, text)
+    }, [])
+    const onRemoveListHandler = useCallback(() => {
+        onRemoveList(todoListID)
+    }, [])
 
     return (
         <Grid item>
@@ -36,9 +42,9 @@ export const TodoList: React.FC<PropsType> = React.memo((props) => {
                     <div className={s.list_header}>
                         <h3 className={s.list_header_title}>
                             <EditableTextField todoListID={todoListID} title={title}
-                                               onValueChange={onChangeTodoListTitle}/>
+                                               onValueChange={onTitleChangeHandler}/>
                         </h3>
-                        <IconButton onClick={() => onRemoveList(todoListID)}>
+                        <IconButton onClick={onRemoveListHandler}>
                             <Delete/>
                         </IconButton>
                     </div>

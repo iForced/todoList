@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useCallback} from "react";
 import {AppBar, Button, Container, Grid, IconButton, Toolbar, Typography} from "@material-ui/core";
 import {Menu} from "@material-ui/icons";
 import {TodoListContainer} from "./TodoListWithRedux/components/TodoList/TodoListContainer";
@@ -9,9 +9,9 @@ import {addTodoList} from "./TodoListWithRedux/store/todoListReducer";
 export const App = () => {
     const dispatch = useDispatch()
 
-    const onAddTodoList = (text: string) => {
+    const onAddTodoList = useCallback((text: string) => {
         dispatch(addTodoList(text))
-    }
+    }, [])
 
     return (
         <>
